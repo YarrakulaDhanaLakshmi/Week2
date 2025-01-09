@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Application</title>
+    <style>
+        /* Inline CSS */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        form {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin: 0.5rem 0 0.2rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9rem;
+        }
+
+        #output {
+            padding: 1rem;
+            background: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Simple Web Application</h1>
+    </header>
+    <main>
+        <section id="input-section">
+            <h2>User Input</h2>
+            <form id="user-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <span id="name-error" class="error"></span>
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required min="1">
+                <span id="age-error" class="error"></span>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <section id="output-section">
+            <h2>Output</h2>
+            <div id="output"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Web App</p>
+    </footer>
+
+    <script>
+        // Inline JavaScript
+        document.getElementById('user-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Clear previous error messages
+            document.getElementById('name-error').textContent = '';
+            document.getElementById('age-error').textContent = '';
+
+            const name = document.getElementById('name').value.trim();
+            const age = document.getElementById('age').value.trim();
+            let valid = true;
+
+            // Validate name
+            if (name === '') {
+                document.getElementById('name-error').textContent = 'Name is required.';
+                valid = false;
+            }
+
+            // Validate age
+            if (age === '' || age <= 0) {
+                document.getElementById('age-error').textContent = 'Please enter a valid age.';
+                valid = false;
+            }
+
+            // If valid, display the output
+            if (valid) {
+                const output = `
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Age:</strong> ${age}</p>
+                `;
+                document.getElementById('output').innerHTML = output;
+            }
+        });
+    </script>
+</body>
+</html>
